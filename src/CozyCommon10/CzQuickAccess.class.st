@@ -459,6 +459,35 @@ CzQuickAccess >> installMicrodownDev [
 	
 ]
 
+{ #category : #'scripts-mine' }
+CzQuickAccess >> installMicrodownDevGD [
+	<cozyScript: #'Install Microdown DEV GD'>
+	
+	Metacello new
+		baseline: 'Microdown';
+		repository: 'github://DelGaylord/MicrodownStage:dev/src';
+		onConflict: [ :e | e useIncoming ];
+		onUpgrade: [ :e | e useIncoming ];
+		ignoreImage;
+		load.
+
+	
+]
+
+{ #category : #'scripts-mine' }
+CzQuickAccess >> installMustache [
+	<cozyScript: #'Install Mustache'>
+	
+	Metacello new
+		baseline: 'Mustache';
+		repository: 'github://noha/mustache:v1.0/repository';
+		onConflict: [ :e | e useIncoming ];
+		onUpgrade: [ :e | e useIncoming ];
+		ignoreImage;
+		load.
+	
+]
+
 { #category : #'code snippets' }
 CzQuickAccess >> installSample [
 	<cozyScript: #'Install Sample'>
