@@ -488,6 +488,21 @@ CzQuickAccess >> installMustache [
 	
 ]
 
+{ #category : #'scripts-mine' }
+CzQuickAccess >> installPillarDev8 [
+	<cozyScript: #'Install Pillar DEV-8'>
+	
+	Metacello new
+		baseline: 'PillarApp';
+		repository: 'github://pillar-markup/Pillar:dev-8/src';
+		onConflict: [ :e | e useIncoming ];
+		onUpgrade: [ :e | e useIncoming ];
+		ignoreImage;
+		load.
+
+	
+]
+
 { #category : #'code snippets' }
 CzQuickAccess >> installSample [
 	<cozyScript: #'Install Sample'>
@@ -573,6 +588,20 @@ CzQuickAccess >> removeCleanlyMDAndBC [
 #( 'BeautifulComments' 'BaselineOfMicrodownDev' 'BaselineOfMicrodown' 'Microdown' 'Microdown-Tests' 'Microdown-MicrodownRichTextComposer' 'Microdown-ResolvePath' 
 'Microdown-ResolvePath-Tests' 'NewTools-DocumentationReader-Tests' 'BaselineOfNewToolsDocumentationReader' 'Microdown-RichTextComposer' 'Spec2-Microdown'
 'NewTools-DocumentationReader') do: [ :each | 
+	(RPackageOrganizer default packageNamed: each ifAbsent: [ nil ]) 
+		ifNotNil: [ :aPackage | aPackage removeFromSystem ] ]
+]
+
+{ #category : #'scripts-mine' }
+CzQuickAccess >> removeCleanlyPillar [
+	<cozyScript: #'Flush Pillar'>
+
+	"This is temporal until we fix the Pharo10 build"
+IceRepository registry 
+	detect: [ :each | each name = 'Microdown' ]
+	ifFound: [ :aRepository | aRepository forget ].
+"This, however, needs to stay :)"
+#( 'BaselineOfMicrodownDev' 'BaselineOfMicrodown' 'Microdown' 'Microdown-Tests' 'Microdown-ResolvePath' 'Microdown-ResolvePath-Tests' ) do: [ :each | 
 	(RPackageOrganizer default packageNamed: each ifAbsent: [ nil ]) 
 		ifNotNil: [ :aPackage | aPackage removeFromSystem ] ]
 ]
