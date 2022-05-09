@@ -503,6 +503,21 @@ CzQuickAccess >> installPillarDev8 [
 	
 ]
 
+{ #category : #'scripts-mine' }
+CzQuickAccess >> installPillarDev8GD [
+	<cozyScript: #'Install Pillar DEV-8 GD'>
+	
+	Metacello new
+		baseline: 'PillarApp';
+		repository: 'github://DelGaylord/pillarStage:dev-8/src';
+		onConflict: [ :e | e useIncoming ];
+		onUpgrade: [ :e | e useIncoming ];
+		ignoreImage;
+		load.
+
+	
+]
+
 { #category : #'code snippets' }
 CzQuickAccess >> installSample [
 	<cozyScript: #'Install Sample'>
